@@ -1,0 +1,138 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+
+</head>
+<style>
+    body,
+    h1 {
+        font-family: "Raleway", sans-serif
+    }
+    
+    body,
+    html {
+        height: 100%
+    }
+    
+    .bgimg {
+        min-height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .top {
+        background-color: #333;
+        overflow: hidden;
+    }
+    
+    .top a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 17px;
+    }
+    
+    .top a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    .top a.active {
+        background-color: #A64564;
+        color: white;
+    }
+    
+    .pp {
+        margin-top: 95px;
+        font-size: 23px;
+        text-align: center;
+    }
+    
+    .ppp {
+        margin-top: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<body>
+    <div style="padding-top: 7px;"></div>
+    <div class="top">
+        <a class="active" href="/admin1/adminloggedin/">Dashboard</a>
+        <a href="/admin1/adminmanageuser/">View and Manage end Users</a>
+        <a href="/admin1/managefeedback/">Manage Feedback</a>
+        <a href="/admin1/adminlogout/">Logout</a>
+    </div>
+    <div class="row" style="padding-top: 7px;">
+
+        <div class="col s4" style="height: 95%;background: #333;">
+            
+            <div class="card center" style="height: 50%; padding-top: 35px; margin-left: 35px; margin-right: 35px; margin-top: 10%;">
+                <i class="indio-text text-lighten-1 large material-icons" style="padding-top: 5px">assignment</i>
+                <!--Card image-->
+                <div class="view overlay">
+                    <h1 id="day"></h1>
+                </div>
+                <div class="card-body text-center">
+                    <h4>
+                    <strong>
+                    <p class="dark-grey-text" id="date">
+                    </p>
+                    </strong>
+                    </h4>
+                </div>
+            </div>
+            <p style="color: white;margin-top: 10%;" class=' container center Trebuchet condenced'>
+            God lets you be successful because he trusts you that you will do the right thing with it. Now, does he get disappointed often? All the time, because people get there and they forget how they got it.
+            </p><p style="color: white;" class='container center Trebuchet condenced'><b>Steve Harvey</b></p>
+        </div>
+        <div class="col s8 ">
+            <h6 style="padding: 7px;color:black;" class="teal lighten-2 center large">Welcome Jwalit !!! you are logged in !!</h6>
+            {% if msg %}
+                <div>
+                    <h5 class="green center" style="padding-bottom: 2px;padding-top: 2px;color:black;" class="center large">{{msg}}</h5>
+                </div>
+            {% endif %}
+            <h5 style="padding: 7px;color:black;" class="orange lighten-2 center large">Statistics</h5>
+            <h6 style="padding: 7px;color:black;" class="teal lighten-2 center large">Total number of Users are {{total_user}}.<br>
+            <br>Total number of Feedbacks given to admin are {{total_feedback}}.<br>
+            <br>Total number of Stock registered over all users are {{total_stock}}.</h6>
+
+        </div>
+    </div>
+    <script>
+            var date = new Date();
+            var d = date.getDay();
+            yr = date.getFullYear();
+            mon = date.getMonth() + 1;
+            dt = date.getDate();
+            var str = "d";
+            if (d == 0)
+                str = "Sunday";
+            if (d == 1)
+                str = "Monday";
+            if (d == 2)
+                str = "Tuesday";
+            if (d == 3)
+                str = "Wednesday";
+            if (d == 4)
+                str = "Thursday";
+            if (d == 5)
+                str = "Friday";
+            if (d == 6)
+                str = "Saturday";
+            var s=["JAN","FEB","MARCH","APRIL","MAY","JUNE","JULY","SEPT","OCT","NOV","DEC"];
+            document.getElementById("date").innerHTML = "It's" + str;
+            document.getElementById("day").innerHTML =  dt + " " + s[mon-1];
+    </script>
+</body>
+</html>

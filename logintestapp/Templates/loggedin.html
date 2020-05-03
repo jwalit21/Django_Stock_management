@@ -1,0 +1,202 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+
+</head>
+<style>
+    body,
+    h1 {
+        font-family: "Raleway", sans-serif
+    }
+    
+    body,
+    html {
+        height: 100%
+    }
+    
+    .bgimg {
+        min-height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .top {
+        background-color: #333;
+        overflow: hidden;
+    }
+    
+    .top a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 17px;
+    }
+    
+    .top a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    .top a.active {
+        background-color: #A64564;
+        color: white;
+    }
+    
+    .pp {
+        margin-top: 95px;
+        font-size: 23px;
+        text-align: center;
+    }
+    
+    .ppp {
+        margin-top: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<body>
+    <div style="padding-top: 7px;"></div>
+    <div class="top">
+        <a class="active" href="/logintestapp/loggedin/">Dashboard</a>
+        <a href="/dashboard1/addstockinfo/">Add Stock</a>
+        <a href="/dashboard1/stocks/">View and Manage Stock</a>
+        <a href="/dashboard1/feedbackinfo/">Feedback</a>
+        <a href="/logintestapp/logout/">Logout</a>
+    </div>
+    <div class="teal lighten-2">
+        <h6 style="padding-top: 7px;color:black;" class="center large">Welcome {{full_name}} !!! you are logged in !!</h6>
+        {% if msg %}
+            <h6 style="padding-top: 7px;color:black;" class="center large">{{msg}}</h6>
+        {%endif%}
+        <div id="chart" class="card-panel lighten-2 z-depth-1" style="background: #333;color: white;">
+            <table>
+            <tr class="row">
+            <td class="col s6">
+            <form class="form-inline my-2 my-lg-0" action="/dashboard1/searchname/">
+                <table>
+                <tr class="row">
+                <td class="col s1">
+                <i class="material-icons white">search</i>
+                </td>
+                <td class="col s9">
+                    <input style="color: white;" class="form-control mr-sm-1" type="search" placeholder="Search by names" aria-label="Search" name="searchname" >
+                </td> 
+                <td class="col s2">   
+                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="search">
+                </td>
+                </tr>
+                </table>
+            </form>
+            </td>
+            <td class="col s6">
+            <form class="form-inline my-2 my-lg-0" action="/dashboard1/searchcat/">
+                <table>
+                <tr class="row">
+                <td class="col s1">
+                <i class="material-icons white">search</i>
+                </td>
+                <td class="col s9">
+                    <input style="color: white;" class="form-control mr-sm-1" type="search" placeholder="Search by catagories" aria-label="Search" name="searchcat" >
+                </td> 
+                <td class="col s2">   
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </td>
+                </tr>
+                </table>
+            </form>
+            </td>
+            </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col s4 " style="height: 95%;background: #333;">
+            
+            <div class="card center" style="height: 50%; padding-top: 35px; margin-left: 35px; margin-right: 35px; margin-top: 10%;">
+                <i class="indio-text text-lighten-1 large material-icons" style="padding-top: 5px">assignment</i>
+                <!--Card image-->
+                <div class="view overlay">
+                    <h1 id="day"></h1>
+                </div>
+                <div class="card-body text-center">
+                    <h4>
+                    <strong>
+                    <p class="dark-grey-text" id="date">
+                    </p>
+                    </strong>
+                    </h4>
+                </div>
+            </div>
+            <p style="color: white;margin-top: 10%;" class=' container center Trebuchet condenced'>
+            God lets you be successful because he trusts you that you will do the right thing with it. Now, does he get disappointed often? All the time, because people get there and they forget how they got it.
+            </p><p style="color: white;" class='container center Trebuchet condenced'><b>Steve Harvey</b></p>
+        </div>
+        <div class="col s8">
+
+            {% if stock_empty_object %}
+            <div class="red">
+                <h6 style="padding-bottom: 7px;padding-top: 7px;color:black;" class="center large">Hey {{full_name}}..!! Hurry up..!! Please order these items.</h6>
+            </div>
+            <table>
+                {% for stock_empty in stock_empty_object %}
+                    <div class = "col s3">
+                        <div class = "card-panel red lighten-4">
+                            <div class = "card-content">
+                                <span class = "card-title"><h3>{{stock_empty.stock_id}}</h3><h5> {{stock_empty.stock_name}} </h5><button link="/dashboard1/updatestockinfo/" class = "btn waves-effect waves-light blue-grey">
+                                <i class = "material-icons">add</i></button>  </h3></span>
+                            <p>Catagory : {{stock_empty.stock_catagory}}<br>Prize : {{stock_empty.stock_prize}}<br>Quantity : {{stock_empty.stock_quantity}}<br>Barrier quantity : {{stock_empty.stock_empty}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </table>
+            {% else %}
+                <div class="green lighten-2">
+                    <h6 style="padding-bottom: 7px;padding-top: 7px;color:black;" class="center large">There are no items which are going to be empty.</h6>
+                </div>
+            {% endif %}
+
+            {% block content %}
+	        {% endblock %}
+            
+        </div>
+    </div>
+    <script>
+            var date = new Date();
+            var d = date.getDay();
+            yr = date.getFullYear();
+            mon = date.getMonth() + 1;
+            dt = date.getDate();
+            var str = "d";
+            if (d == 0)
+                str = "Sunday";
+            if (d == 1)
+                str = "Monday";
+            if (d == 2)
+                str = "Tuesday";
+            if (d == 3)
+                str = "Wednesday";
+            if (d == 4)
+                str = "Thursday";
+            if (d == 5)
+                str = "Friday";
+            if (d == 6)
+                str = "Saturday";
+            var s=["JAN","FEB","MARCH","APRIL","MAY","JUNE","JULY","SEPT","OCT","NOV","DEC"];
+            document.getElementById("date").innerHTML = "It's" + str;
+            document.getElementById("day").innerHTML =  dt + " " + s[mon-1];
+    </script>
+</body>
+
+</html>

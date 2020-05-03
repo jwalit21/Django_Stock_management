@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<!--
+	<style>
+
+		body
+      	{
+      		background-image: linear-gradient(to right,black,white);
+      	}
+      	
+      	input,
+		input::-webkit-input-placeholder 
+		{	
+    		font-size: 20px;
+    		line-height: 1;
+		}
+      	input
+      	{
+      		border: 2px solid bisque;
+      		border-color: black;
+    		padding: 10px 10px 10px 10px;
+    		background-color: #eee;
+    		margin-top: 35px;
+    		margin-right: 10px;
+    		margin-bottom: 10px;
+    		margin-left: 10px;
+    		font-size: 18px;
+      	}
+      	form
+      	{
+      		border: 5px groove bisque;
+    		padding: 50px 50px 50px 50px;
+    		background-color: black;
+    		border-radius: 40px;
+    		text-align: center;
+      		margin-right: 450px;
+      		margin-left: 450px;
+      		margin-bottom: 50px;
+      		background-image: linear-gradient(to right,#a3a3a3,white);
+      	}
+
+	ul 
+	{
+		font-size: 23px;
+  		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #555;
+	}
+
+	li 
+	{
+  		float: left;
+  		width: 50%;
+	}
+
+	li a 
+	{
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+	}	
+
+	li a:hover:not(.active) 
+	{
+  		background-color: #089;
+	}
+
+	.active 
+	{
+  		background-color: #000000;
+	}
+	.my
+	{
+		font-size: 65px;
+		text-align: center;
+		margin-top: 50px;
+		margin-left: 150px;
+		color: #f52535;
+    	-webkit-mask-box-image: url(mask.png) 0 0 repeat;
+    	letter-spacing: 1px;
+    	text-shadow: 2px 2px 3px white, 3px 3px 5px blue;
+	}
+	
+</style>
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+<style>
+	.iris {
+        background-image: url("{% static 'images/new.jpg' %} ");
+        background-repeat: no-repeat;
+        height: 150vh;
+        background-size: cover;
+    }
+</style>
+</head>
+<body>
+	<br>
+	<div class="teal lighten-2 center"><a href="" class="teal lighten-2" style="font-size: 40px;color: #000;"><b>Login</b></a></div>
+	{% if msg %}
+		<div style="font-size:25px;" class="teal lighten-2 center"> {{msg}}</div>
+	{% endif %}
+	<br>
+	<form action="/logintestapp/auth/" method="POST" class="container login-form" style="padding-left: 10%;padding-right: 10%;">
+		{% csrf_token %}
+		
+		<!--
+		<ul>
+  			<li><a class="active" href="../login/">Login</a></li>
+  			<li><a href="../addCustomer/">Sign Up</a></li>
+		</ul>
+		<input type="text" name="username" placeholder="Enter Your Username"><br>
+		<input type="password" name="password" placeholder="Enter Your Password"><br>
+		<input type="submit" clas="sub" value="Login">
+
+		-->
+
+
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="mdi-social-person-outline prefix"></i>
+					<input class="validate" id="username" name="username" type="text" placeholder="Username" required>
+					<label for="text" data-error="wrong" data-success="right" class="center-align"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="mdi-action-lock-outline prefix"></i>
+					<input id="user_pass" name="password" placeholder="Password" type="password">
+					<label for="password"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="center input-field col s12">
+					<input style="width: 52em;" class="center btn teal lighten-2" type="submit" value="Login">
+				</div>
+			</div>
+	</form>
+	<div class="row container"  style="padding-left: 10%;padding-right: 10%;">
+		<div class="input-field col s4 m4 l4">
+			<a class="margin medium-small btn green" href="../addCustomer/">Register Now!</a>
+		</div>               
+		<div class="input-field col s4 m4 l4">
+			<a class="btn blue margin medium-small" href="/dashboard1/home/">Back to pavalion !!!</a>
+		</div>               
+		<div class="input-field col s4 m4 l4">
+			<a class="margin medium-small btn red" href="/logintestapp/forgotpassword/">Forgot password??</a>
+		</div>               
+	</div>
+</body>
+</html>

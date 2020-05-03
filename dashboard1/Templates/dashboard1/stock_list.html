@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<head>
+    <title>list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1">      
+    <script type = "text/javascript"
+        src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+    <style>
+
+    body,
+    h1 {
+        font-family: "Raleway", sans-serif
+    }
+    
+    body,
+    html {
+        height: 100%
+    }
+    
+    .bgimg {
+        min-height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .top {
+        background-color: #333;
+        overflow: hidden;
+    }
+    
+    .top a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 17px;
+    }
+    
+    .top a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    .top a.active {
+        background-color: #A64564;
+        color: white;
+    }
+    
+    .pp {
+        margin-top: 95px;
+        font-size: 23px;
+        text-align: center;
+    }
+    
+    .ppp {
+        margin-top: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div style="padding-top: 7px;"></div>
+    <div class="top">
+        <a href="/logintestapp/loggedin/">Dashboard</a>
+        <a href="/dashboard1/addstockinfo/">Add Stock</a>
+        <a class="active" href="/dashboard1/stocks/">View and Manage Stock</a>
+        <a href="/dashboard1/feedbackinfo/">Feedback</a>
+        <a href="/logintestapp/logout/">Logout</a>
+    </div>
+    <div class="teal lighten-2">
+        <h6 style="padding-top: 7px;color:black;" class="center large">Welcome {{request.user.username}} !!! you are logged in !!</h6>
+        <div id="chart" class="card-panel lighten-2 z-depth-1" style="background: #333;color: white;">
+            <table>
+            <tr class="row">
+            <td class="col s6">
+            <form class="form-inline my-2 my-lg-0" action="/dashboard1/searchname/">
+                <table>
+                <tr class="row">
+                <td class="col s1">
+                <i class="material-icons white">search</i>
+                </td>
+                <td class="col s9">
+                    <input style="color: white;" class="form-control mr-sm-1" type="search" placeholder="Search by names" aria-label="Search" name="searchname" >
+                </td> 
+                <td class="col s2">   
+                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="search">
+                </td>
+                </tr>
+                </table>
+            </form>
+            </td>
+            <td class="col s6">
+            <form class="form-inline my-2 my-lg-0" action="/dashboard1/searchcat/">
+                <table>
+                <tr class="row">
+                <td class="col s1">
+                <i class="material-icons white">search</i>
+                </td>
+                <td class="col s9">
+                    <input style="color: white;" class="form-control mr-sm-1" type="search" placeholder="Search by catagories" aria-label="Search" name="searchcat" >
+                </td> 
+                <td class="col s2">   
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </td>
+                </tr>
+                </table>
+            </form>
+            </td>
+            </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+    <h3 class="center card-panel teal lighten-2" style="font-family: jazz let">stock list</h3>
+    {% if stock_list %}
+    <ul>
+    <script>
+        var flag=0;
+    </script>
+        <table class="centered striped bordered">
+            <thead>
+                <tr>
+                    <th>Stock Id</th>
+                    <th>Stock Name</th>
+                    <th>Catagory</th>
+                    <th>Prize</th>
+                    <th>Current stock</th>
+                    <th>Min required stock</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for stock in stock_list %}
+                {% if stock.stock_username == request.user.username %}
+                <script>
+                    var flag=1;
+                </script> 
+                <tbody>
+                    <tr>
+                        <td>{{ stock.stock_id }}</td>
+                        <td>{{ stock.stock_name }}</td>
+                        <td>{{ stock.stock_catagory }}</td>
+                        <td>{{ stock.stock_prize }}</td>
+                        <td>{{ stock.stock_quantity }}</td>
+                        <td>{{ stock.stock_empty }}</td>
+                        <td> <a class="btn btn-primary" href="../updatestockinfo?stock_id={{stock.stock_id}}&stock_name={{stock.stock_name}}&stock_empty={{ stock.stock_empty }}&stock_prize={{stock.stock_prize}}&stock_cat={{ stock.stock_catagory }}&stock_quantity={{stock.stock_quantity}}">Update</a></td>
+                        <td><a class="btn red btn-danger" href="../deletestockdata?stock_id={{stock.stock_id}}">Delete</a></td>
+                    </tr>
+                </tbody>
+                {%endif%}
+                <!--<a href="{{ stock.get_absolute_url }}">{{ stock.stock_name }}</a> ({{stock.stock_id}}) ({{stock.stock_id}}) ({{stock.stock_id}})-->
+            {% endfor %}
+            <div>
+                <h5 class="red center" id="errmsg" style="padding-bottom: 2px;padding-top: 2px;color:black;" class="center large"></h5>
+            </div>
+            <script>
+                if(flag==0)
+                {
+                    document.getElementById("errmsg").innerHTML="There are no stocks registered."
+                }
+            </script>
+        </table>
+    </ul>
+    {% else %}
+    <div class="red">
+        <h5 style="padding-bottom: 2px;padding-top: 2px;color:black;" class="center large">There are no stock registered.</h5>
+    </div>
+    {% endif %}
+</body>

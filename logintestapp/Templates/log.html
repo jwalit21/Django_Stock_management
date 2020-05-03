@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+g
+</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+</head>
+<body>
+<h4>Material Design Login Form</h4>
+<div id="user-login" class="row container">
+	<div class="col s12 z-depth-6 card-panel">
+		<form class="login-form" action="/logintestapp/auth/" method="POST">    {% csrf_token %}
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="mdi-social-person-outline prefix"></i>
+					<input class="validate" id="user_email" type="email">
+					<label for="email" data-error="wrong" data-success="right" class="center-align">Email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="mdi-action-lock-outline prefix"></i>
+					<input id="user_pass" type="password">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">          
+				<div class="input-field col s12 m12 l12  login-text">
+					<input type="checkbox" id="remember-me" />
+					<label for="remember-me">Remember me</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<a href="login.html" class="btn waves-effect waves-light col s12">Login</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6 m6 l6">
+					<p class="margin medium-small"><a href="register.php">Register Now!</a></p>
+				</div>               
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

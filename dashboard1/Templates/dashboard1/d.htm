@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>t</title>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col s12">This div is 12-columns wide on all screen sizes</div>
+        <div class="col s6">6-columns (one-half)</div>
+        <div class="col s6">6-columns (one-half)</div>
+    </div>
+    <div class="card-panel teal lighten-2">This is a card panel with a teal lighten-2 class</div>
+
+</body>
+
+
+{% if form.errors %}
+<p class="error"> Invalid Stock info </p>
+{% endif %}
+
+<div class="row" style="padding-top: 4%;padding-right: 4%;padding-left: 4%;">
+    <form class="col s12" action="../updatestockdata/">
+        <div class="row">
+            <div class="input-field col s6">
+                <input value="{{stock_name}}" name="stockname" id="stock_name" type="text">
+                <label for="stock_name">Stock Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input disabled value="{{stock_id}}" id="stock_id1" type="text">
+                <input value="{{stock_id}}" type="hidden" name="stockid">
+                <label for="stock_id1">Id</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="stock_cat" type="text" name="stockcat" value="{{stock_cat}}">
+                <label for="stock_cat">Catagory</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="stock_prize" type="text" name="stockprize" value="{{stock_prize}}">
+                <label for="stock_prize">Prize</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="stock_quantity" type="text" name="stockquantity" value="{{stock_quantity}}">
+                <label for="stock_quantity">Quantity</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="stock_empty" type="text" name="stockempty" value="{{stock_empty}}">
+                <label for="stock_empty">Minimum required stock</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input class="btn blue" type="reset" value="reset">
+                <input class="btn green" type="submit" value="update">
+            </div>
+        </div>
+    </form>
+</div>
+<p style="padding-left: 5.5%;">
+    <a href="/dashboard1/stocks/">Click to view stock records.</a>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if form.errors %}
+<p class="error"> Invalid Student info </p>
+{% endif %}
+
+<form action="../addstockdata/" method="POST">{% csrf_token %}
+    <!--<ul>
+  			<li><a href="../login/">Login</a></li>
+  			<li><a class="active" href="../addCustomer/">Sign Up</a></li>
+        </ul>-->
+    <table>
+        <tr>
+            <td>
+                Name :
+            </td>
+            <td>
+                <input type="text" name="stockname" placeholder="Enter stock name"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Id :
+            </td>
+            <td>
+                <input type="text" name="stockid" placeholder="Enter unique stock id"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Catagory :
+            </td>
+            <td>
+                <input type="text" name="stockcat" placeholder="Enter stock Catagory"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                prize :
+            </td>
+            <td>
+                <input type="text" name="stockprize" placeholder="Enter prize per each item"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                quantity :
+            </td>
+            <td>
+                <input type="text" name="stockquantity" placeholder="Enter quantity of this stock"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Minimum stock :
+            </td>
+            <td>
+                <input type="text" name="stockempty" placeholder="Enter minimum stock quantity"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="reset">
+            </td>
+            <td>
+                <input type="submit" clas="sub">
+            </td>
+        </tr>
+    </table>
+</form>
+<p>
+    <a href="/dashboard1/stocks/">Click here to view stock records.</a>
+</p>

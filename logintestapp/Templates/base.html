@@ -1,0 +1,30 @@
+<!-- howdy/templates/index.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Student Portal</title>
+    </head>
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+
+<body>
+  <h2>Django logint test App!</h2>
+	<tr>
+	<td> <a href="/viewdemoapp/index/">Home</a>  </td>
+	
+	<br>
+	</tr>
+
+	{% block content %}
+	{% endblock %}
+    	
+    </body>
+</html>
