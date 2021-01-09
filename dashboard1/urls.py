@@ -3,6 +3,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+                url('/', views.home),
+                url('home/', views.home),
                 url('addstockinfo/', views.addstockinfo),
                 url('deletestockdata/', views.deletestockdata),
                 url('updatestockinfo/', views.updatestockinfo),
@@ -12,7 +14,6 @@ urlpatterns = [
                 url('searchcat/',views.searchcat),
                 url('feedbackinfo/',views.feedbackinfo),
                 url('feedbackdata/',views.feedbackdata),
-                url('home/', views.home),
                 url('instagram/', views.instagram),
                 url('facebook/', views.facebook),
                 url('twitter/', views.twitter),
